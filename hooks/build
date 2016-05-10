@@ -4,7 +4,7 @@ echo Building in SDK environment
 
 docker build --rm --force-rm -t fullbuild .
 docker run --rm --entrypoint cat fullbuild /home/opam/test > /tmp/test
-docker run --name newbase alpine tail -f /dev/null
+docker run -d --name newbase alpine tail -f /dev/null
 docker exec newbase apk --update add libstdc++ 
 docker cp /tmp/test newbase:/root/test
 docker commit newbase this
