@@ -12,3 +12,6 @@ docker commit newbase this
 docker rm -f newbase || true
 docker rmi fullbuild
 docker images
+
+echo $IMAGE_NAME
+docker tag this avsm/experiment-dchooks
