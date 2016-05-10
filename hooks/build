@@ -3,8 +3,10 @@
 BINARY=atdgen
 DEPS=
 
+set -e
 docker build --rm --force-rm -t fullbuild .
-docker run --rm fullbuild sh -c "cat `opam config var bin`/$BINARY" > /tmp/$BINARY
+docker run --rm fullbuild sh -c "which $BINARY" > /tmp/binloc
+docker run --rm fullbuild sh -c "cat `cat /tmp/binloc`" > /tmp/$BINARY
 docker run -d --name newbase alpine tail -f /dev/null
 if [ -n "$DEPS" ]; then
   docker exec newbase apk --update add $DEPS
