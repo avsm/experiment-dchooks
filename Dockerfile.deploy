@@ -1,4 +1,4 @@
 FROM alpine
 RUN apk --update add libstdc++
-COPY test /root/test
+COPY /app/test /root/test
 RUN /root/test
