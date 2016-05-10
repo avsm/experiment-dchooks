@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -x
 echo Building in SDK environment
 
 docker build --rm --force-rm -t fullbuild .
@@ -10,3 +11,4 @@ docker cp /tmp/test newbase:/root/test
 docker commit newbase this
 docker rm -f newbase || true
 docker rmi fullbuild
+docker images
