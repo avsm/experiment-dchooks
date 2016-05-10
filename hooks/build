@@ -3,5 +3,6 @@
 echo Building in SDK environment
 
 docker build --rm --force-rm -t fullbuild .
-docker cp fullbuild:/home/opam/test ./test
+docker run --rm --entrypoint cat fullbuild /home/opam/test > ./test
 docker build -f Dockerfile.deploy -t this .
+docker rmi fullbuild
