@@ -1,4 +1,0 @@
-#!/bin/sh
-echo POST BUILD HOOK
-docker ps
-docker images
