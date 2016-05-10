@@ -1,2 +1,2 @@
 FROM ocaml/opam:alpine
-RUN opam depext -ui atdgen
+RUN opam depext -ui jenga

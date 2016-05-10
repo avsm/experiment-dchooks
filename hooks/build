@@ -1,16 +1,15 @@
 #!/bin/sh
+# Build a smaller Alpine container from a larger build image
 
-BINARY=atdgen
-DEPS=
+BINARY=jenga
+DEPS=libstdc++
 
 set -e
 docker build --rm --force-rm -t fullbuild .
 docker run --rm fullbuild sh -c "which $BINARY" > /tmp/binloc
 docker run --rm fullbuild sh -c "cat `cat /tmp/binloc`" > /tmp/$BINARY
 docker run -d --name newbase alpine tail -f /dev/null
-if [ -n "$DEPS" ]; then
-  docker exec newbase apk --update add $DEPS
-fi
+if [ -n "$DEPS" ]; then docker exec newbase apk --update add $DEPS; fi
 docker cp /tmp/$BINARY newbase:/root/$BINARY
 docker exec newbase chmod a+x /root/$BINARY
 docker commit newbase $IMAGE_NAME
