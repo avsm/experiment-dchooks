@@ -2,7 +2,7 @@
 # Build a smaller Alpine container from a larger build image
 
 BINARY=jenga
-DEPS=libstdc++
+DEPS="libstdc++ tzdata gcc bash alpine-sdk"
 
 set -e
 docker build --rm --force-rm -t fullbuild .
